@@ -7,10 +7,20 @@ pipeline {
     DOCKER_TAG = getDockerTag()
     
      }
-    stages{
+      
+     stages{
+        stage('Cleanup Workspace') {
+            steps {
+                cleanWs()
+                sh """
+                echo "Cleaned Up Workspace For Project"
+                """
+            }
+        }
+         
         stage('Git CheckOut'){
             steps{
-                git 'https://github.com/ankupsatpute/simple-app.git'     
+                git 'https://github.com/ankupsatpute/blue_green_deployment.git'     
                 //echo "$BUILD_TRIGGER_BY"
                }
             }
